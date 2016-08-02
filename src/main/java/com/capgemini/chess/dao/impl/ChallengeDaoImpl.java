@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.capgemini.chess.dao.ChallengeDao;
 import com.capgemini.chess.dataaccess.enums.ChallengeStatus;
 import com.capgemini.chess.service.to.ChallengeTO;
-
+//@Repository tez ok, obsluguje sql exceptions
 @Component
 public class ChallengeDaoImpl implements ChallengeDao {
 	
@@ -60,9 +60,10 @@ public class ChallengeDaoImpl implements ChallengeDao {
 	}
 
 	@Override
-	public final void readListOfChallengeTO() {
+	public void readListOfChallengeTO() {
 		List<ChallengeTO> list = getMockingChallengeTableList();
 		System.out.println("List contains: ");
+		//logger!
 		for (ChallengeTO challengeTO : list) {
 			System.out.println("Challenge ID: " + challengeTO.getId());
 			System.out.println("Start date: " + challengeTO.getStartDate());
@@ -71,7 +72,7 @@ public class ChallengeDaoImpl implements ChallengeDao {
 	}
 
 	@Override
-	public final void deleteListOfChallengeTO() {
+	public void deleteListOfChallengeTO() {
 		List<ChallengeTO> temporaryList = getMockingChallengeTableList();
 		temporaryList.clear();
 		setMockingChallengeTableList(temporaryList);
@@ -89,7 +90,7 @@ public class ChallengeDaoImpl implements ChallengeDao {
 	 * Setter for list simulating database's "CHALENGES" table.
 	 * @param inputlist 
 	 */
-	public final void setMockingChallengeTableList(final List<ChallengeTO> inputlist) {
+	public void setMockingChallengeTableList(final List<ChallengeTO> inputlist) {
 		ChallengeDaoImpl.mockingChallengeTableList = inputlist;
 	}
 }

@@ -3,7 +3,6 @@ package com.capgemini.chess.service;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -36,7 +35,7 @@ import com.capgemini.chess.service.to.ChallengeTO;
 public class ChallengeDaoTest {
 
 	@Mock
-	ChallengeDaoImpl challengeDaoImpl;
+	private ChallengeDao challengeDao;
 
 	private List<ChallengeTO> testList = new LinkedList<ChallengeTO>();
 	
@@ -47,11 +46,10 @@ public class ChallengeDaoTest {
 	@Test(expected = RuntimeException.class)
 	public void shouldCreateListOfChallenges() {
 		// given
-		challengeDaoImpl.createListOfChallengeTO();
 		// when
-		Mockito.doThrow(new RuntimeException()).when(challengeDaoImpl).createListOfChallengeTO();
+		Mockito.doThrow(new RuntimeException()).when(challengeDao).createListOfChallengeTO();
 		// then
-		challengeDaoImpl.createListOfChallengeTO();
+		challengeDao.createListOfChallengeTO();
 	}
 
 	/**
@@ -60,11 +58,11 @@ public class ChallengeDaoTest {
 	@Test(expected = RuntimeException.class)
 	public void shouldReadListOfChallenges() {
 		// given
-		challengeDaoImpl.createListOfChallengeTO();
+		challengeDao.createListOfChallengeTO();
 		// when
-		Mockito.doThrow(new RuntimeException()).when(challengeDaoImpl).readListOfChallengeTO();
+		Mockito.doThrow(new RuntimeException()).when(challengeDao).readListOfChallengeTO();
 		// then
-		challengeDaoImpl.readListOfChallengeTO();
+		challengeDao.readListOfChallengeTO();
 	}
 
 	/**
@@ -73,11 +71,11 @@ public class ChallengeDaoTest {
 	@Test(expected = RuntimeException.class)
 	public void shouldUpdateListOfChallenges() {
 		// given
-		challengeDaoImpl.createListOfChallengeTO();
+		challengeDao.createListOfChallengeTO();
 		// when
-		Mockito.doThrow(new RuntimeException()).when(challengeDaoImpl).deleteOverdueChallengesFromListOfChallengeTO();
+		Mockito.doThrow(new RuntimeException()).when(challengeDao).deleteOverdueChallengesFromListOfChallengeTO();
 		// then
-		challengeDaoImpl.deleteOverdueChallengesFromListOfChallengeTO();
+		challengeDao.deleteOverdueChallengesFromListOfChallengeTO();
 	}
 
 	/**
@@ -86,11 +84,11 @@ public class ChallengeDaoTest {
 	@Test(expected = RuntimeException.class)
 	public void shouldDeleteListOfChallenges() {
 		// given
-		challengeDaoImpl.createListOfChallengeTO();
+		challengeDao.createListOfChallengeTO();
 		// when
-		Mockito.doThrow(new RuntimeException()).when(challengeDaoImpl).deleteListOfChallengeTO();
+		Mockito.doThrow(new RuntimeException()).when(challengeDao).deleteListOfChallengeTO();
 		// then
-		challengeDaoImpl.deleteListOfChallengeTO();
+		challengeDao.deleteListOfChallengeTO();
 	}
 	
 	@Ignore
@@ -101,18 +99,14 @@ public class ChallengeDaoTest {
 		Date endDate1 = new Date(startDate.getTime() + 20000);
 		Date endDate2 = new Date(startDate.getTime() + 30000);
 		// when
-		challengeDaoImpl.createListOfChallengeTO();
+		challengeDao.createListOfChallengeTO();
 		setTestList(ChallengeDaoImpl.getMockingChallengeTableList());
 		// then
 		Assert.assertTrue(testList.contains(new ChallengeTO(0, 1, 2, startDate, endDate1, ChallengeStatus.WAITING_FOR_REPLY)));
 		Assert.assertTrue(testList.contains(new ChallengeTO(1, 1, 2, startDate, endDate2, ChallengeStatus.WAITING_FOR_REPLY)));
 	}
 
-	public List<ChallengeTO> getTestList() {
-		return testList;
-	}
-
-	public void setTestList(List<ChallengeTO> testList) {
+	private void setTestList(List<ChallengeTO> testList) {
 		this.testList = testList;
 	}
 

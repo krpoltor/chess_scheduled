@@ -1,13 +1,17 @@
 package com.capgemini.chess.service;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.capgemini.chess.ChessApplication;
+import com.capgemini.chess.dao.ChallengeDao;
 
 /**
  * Test class for testing {@link ChallengeLisManagementService}<br>
@@ -19,12 +23,20 @@ import com.capgemini.chess.ChessApplication;
  * @author KRPOLTOR
  *
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(MockitoJUnitRunner.class)
 @SpringApplicationConfiguration(classes = ChessApplication.class)
 public class ChallengeManagementServiceTest {
 
 	@Mock
+	ChallengeDao challengeDao;
+	
+	@InjectMocks
 	ChallengeListManagementService challengeManagementService;
+
+	@Before
+	public void initMocks() {
+		MockitoAnnotations.initMocks(this);
+	}
 
 	@Test(expected = RuntimeException.class)
 	public void shouldTestCallingMethodPrint() {

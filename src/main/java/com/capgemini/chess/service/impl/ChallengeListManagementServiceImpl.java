@@ -12,7 +12,7 @@ public class ChallengeListManagementServiceImpl implements ChallengeListManageme
 	private ChallengeDao challengeDao;
 
 	@Override
-	public final void removeOverdueChallengesFromListOfChallengeTO() {
+	public void removeOverdueChallengesFromListOfChallengeTO() {
 		challengeDao.deleteOverdueChallengesFromListOfChallengeTO();
 	}
 
